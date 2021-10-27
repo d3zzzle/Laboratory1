@@ -30,12 +30,14 @@ int main()
 			//printf("%d\n", masRem[i]);
 		}
 		for (i = 0; i < n; i++)
-		{
 			if (masRem[i] < n)
+			{
 				sum = sum - masOsn[masRem[i]];
-			else
+				masOsn[masRem[i]] = 0;
+			}
+		for (i=0; i < n; i++)
 				sum = sum + masOsn[i];
-		}
+		
 		printf("sum = %lf\n", sum);
 		free(masOsn);
 		free(masRem);
