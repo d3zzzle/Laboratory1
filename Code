@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+	int n = 0, i = 0;
+	double min = 0.0, max = 0.0, sum = 0.0, rem = 0.0;
+
+	printf("Input n, max, min\n");
+	scanf_s("%d %lf %lf", &n, &max, &min);
+
+	if ((n <= 0) || (max <= min)) printf("Error: check the correctness of the input.");
+	else
+	{
+		double* masOsn = (double*)malloc(sizeof(double) * n);
+		int* masRem = (int*)malloc(sizeof(int) * n);
+
+		for (i = 0; i < n; i++)
+		{
+			masOsn[i] = (((double)rand() / RAND_MAX) * (max - min) + min);
+			rem = ((masOsn[i] - (int)masOsn[i]) * 10000);
+			if (rem != 0)
+			{
+				masRem[i] = (int)rem;
+				while (masRem[i] % 10 == 0)
+					masRem[i] = masRem[i] / 10;
+			}
+			//printf("%lf\n", masOsn[i]);
+			//printf("%d\n", masRem[i]);
+		}
+		for (i = 0; i < n; i++)
+		{
+			if (masRem[i] < n)
+				sum = sum - masOsn[masRem[i]];
+			else
+				sum = sum + masOsn[i];
+		}
+		printf("sum = %lf\n", sum);
+		free(masOsn);
+		free(masRem);
+	}
+	return 0;
+}
